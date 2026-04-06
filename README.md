@@ -1,90 +1,81 @@
-# MicroLend Platform 💸
+# Multi-Tiered Micro-Lending Platform
 
-> A multi-tiered micro-lending platform where multiple lenders can fractionally fund a single loan — built with enterprise-grade financial integrity.
+A full-stack micro-lending web application that enables multiple lenders to fractionally co-fund a single borrower loan. Built with a database-first approach — critical financial logic lives at the PostgreSQL layer, not the application layer.
 
-![Next.js](https://img.shields.io/badge/Next.js-14-black?style=flat-square&logo=next.js)
-![NestJS](https://img.shields.io/badge/NestJS-10-E0234E?style=flat-square&logo=nestjs)
-![PostgreSQL](https://img.shields.io/badge/PostgreSQL-16-4169E1?style=flat-square&logo=postgresql)
-![Prisma](https://img.shields.io/badge/Prisma-ORM-2D3748?style=flat-square&logo=prisma)
-![Tailwind CSS](https://img.shields.io/badge/Tailwind-CSS-38B2AC?style=flat-square&logo=tailwind-css)
+**Group ID:** 13
 
 ---
 
-## 🧠 What Makes This Unique
+## Overview
 
-Unlike standard CRUD applications, this platform pushes critical financial business logic directly to the database layer:
+Most lending platforms treat the database as a simple store. This platform pushes business logic down:
 
-- **Atomic Disbursal Engine** — Manages complex many-to-many loan fractionalization (multiple lenders funding a single loan) strictly within single PostgreSQL transaction blocks, preventing any data anomalies.
-- **Immutable Audit Ledger** — PostgreSQL triggers and shadow tables automatically log every financial state change, simulating enterprise-grade regulatory compliance.
-- **Role-Based Architecture** — Separate dashboards and API guards for Borrowers, Lenders, and Admins.
-
----
-
-## 🏗️ Tech Stack
-
-| Layer | Technology |
-|-------|-----------|
-| Frontend | Next.js 14 (App Router), Tailwind CSS |
-| Backend | Node.js, NestJS |
-| Database | PostgreSQL 16, Prisma ORM |
-| Auth | JWT, Role-based guards |
+- **Loan fractionalization** is handled inside single atomic transaction blocks, so partial funding from multiple lenders either fully commits or fully rolls back — no half-states.
+- **Every financial state change** is captured automatically by PostgreSQL triggers into an append-only shadow table, creating an immutable audit trail without any application-layer code.
 
 ---
 
-## 📁 Project Structure
+## Tech Stack
+
+| Layer      | Technology                        |
+|------------|-----------------------------------|
+| Frontend   | Next.js 14 (App Router), Tailwind CSS |
+| Backend    | Node.js, NestJS                   |
+| Database   | PostgreSQL 16, Prisma ORM         |
+| Auth       | JWT, role-based guards            |
+
+---
+
+## Project Structure
 
 ```
 microlend-platform/
-├── frontend/          # Next.js 14 app
+├── frontend/
 │   ├── app/
-│   │   ├── (auth)/
-│   │   │   └── login/
-│   │   ├── borrower/
-│   │   │   └── dashboard/
-│   │   ├── lender/
-│   │   │   └── dashboard/
-│   │   └── admin/
-│   │       └── panel/
+│   │   ├── (auth)/login/
+│   │   ├── borrower/dashboard/
+│   │   ├── lender/dashboard/
+│   │   └── admin/panel/
 │   └── components/
-├── backend/           # NestJS app
+├── backend/
 │   └── src/
 │       ├── auth/
 │       ├── loans/
 │       ├── users/
 │       └── ledger/
+├── .gitignore
 └── README.md
 ```
 
 ---
 
-## ⚙️ Getting Started
+## Getting Started
 
 ### Prerequisites
 
-- Node.js v18+
+- Node.js v18 or higher
 - PostgreSQL 16
-- npm or yarn
+- npm
 
-### 1. Clone the repo
+### 1. Clone the repository
 
 ```bash
 git clone https://github.com/YOUR_USERNAME/microlend-platform.git
 cd microlend-platform
 ```
 
-### 2. Setup the backend
+### 2. Configure and run the backend
 
 ```bash
 cd backend
 npm install
 cp .env.example .env
-# Fill in your PostgreSQL credentials in .env
+# Edit .env and fill in your PostgreSQL credentials
 npx prisma migrate dev
-npx prisma db seed
 npm run start:dev
 ```
 
-### 3. Setup the frontend
+### 3. Configure and run the frontend
 
 ```bash
 cd frontend
@@ -94,80 +85,71 @@ cp .env.local.example .env.local
 npm run dev
 ```
 
-### 4. Open the app
-
-Go to [http://localhost:3000](http://localhost:3000)
+The app will be available at `http://localhost:3000`.
 
 ---
 
-## 🌿 Branch Strategy
+## Environment Variables
 
-| Branch | Purpose |
-|--------|---------|
-| `main` | Stable, working code only |
-| `feature/frontend-login` | Login & signup page |
-| `feature/frontend-dashboard` | Borrower & lender dashboards |
-| `feature/backend-loans` | Loan lifecycle APIs |
-| `feature/database-schema` | Prisma schema & migrations |
-| `feature/audit-ledger` | Triggers & shadow tables |
+**Backend** — `backend/.env`
 
----
-
-## 🤝 Contributing (for team members)
-
-```bash
-# Step 1 — Always pull latest before starting
-git pull origin main
-
-# Step 2 — Create your own branch
-git checkout -b feature/your-name-task
-
-# Step 3 — Make changes, then commit
-git add .
-git commit -m "feat: describe what you did"
-
-# Step 4 — Push your branch
-git push origin feature/your-name-task
-
-# Step 5 — Open a Pull Request on GitHub
-# Go to github.com → your repo → "Compare & pull request"
 ```
-
-> **Rule:** Never push directly to `main`. Always open a Pull Request.
-
----
-
-## 🔑 Environment Variables
-
-### Backend (`backend/.env`)
-
-```env
 DATABASE_URL="postgresql://user:password@localhost:5432/microlend"
 JWT_SECRET="your-secret-key"
 PORT=3001
 ```
 
-### Frontend (`frontend/.env.local`)
+**Frontend** — `frontend/.env.local`
 
-```env
+```
 NEXT_PUBLIC_API_URL=http://localhost:3001
 ```
 
 ---
 
-## 👥 Team
+## Branch Strategy
 
-| Name | Role |
-|------|------|
-| — | Frontend (Next.js) |
-| — | Backend (NestJS) |
-| — | Database (PostgreSQL + Prisma) |
-| — | UI/UX & Integration |
-
-**Group ID:** 13
+| Branch | Purpose |
+|--------|---------|
+| `main` | Stable code only — no direct pushes |
+| `feature/frontend-login` | Login and signup pages |
+| `feature/frontend-dashboard` | Borrower and lender dashboards |
+| `feature/backend-loans` | Loan lifecycle APIs |
+| `feature/database-schema` | Prisma schema and migrations |
+| `feature/audit-ledger` | Triggers and shadow tables |
 
 ---
 
-## 📄 License
+## Contributing
 
-This project is built for academic purposes.
+```bash
+# Pull latest before starting any work
+git pull origin main
+
+# Create a branch for your task
+git checkout -b feature/your-name-task
+
+# Commit your changes
+git add .
+git commit -m "feat: short description of change"
+
+# Push and open a Pull Request on GitHub
+git push origin feature/your-name-task
+```
+
+Do not push directly to `main`. All changes go through a Pull Request.
+
+---
+
+## Team
+
+| Name | Role |
+|------|------|
+|      | Frontend — Next.js, Tailwind CSS |
+|      | Backend — NestJS, REST APIs |
+|      | Database — PostgreSQL, Prisma |
+|      | Integration and testing |
+
+---
+
+*Built as a mini project for academic purposes.*
