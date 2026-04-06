@@ -155,6 +155,19 @@ NEXT_PUBLIC_API_URL=http://localhost:3001
 
 ---
 
+## 👥 Team
+
+| Name | Role |
+|------|------|
+| — | Frontend (Next.js) |
+| — | Backend (NestJS) |
+| — | Database (PostgreSQL + Prisma) |
+| — | UI/UX & Integration |
+
+**Group ID:** 13
+
+---
+
 ## 📄 License
 
 This project is built for academic purposes.
