@@ -43,6 +43,12 @@ microlend-platform/
 │       ├── loans/
 │       ├── users/
 │       └── ledger/
+├── database/          ← SQL files
+│   ├── schema.sql
+│   ├── triggers.sql
+│   ├── procedures.sql
+│   ├── views.sql
+│   └── seed_data.sql
 ├── .gitignore
 └── README.md
 ```
