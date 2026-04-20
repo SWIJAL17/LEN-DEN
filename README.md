@@ -2,7 +2,6 @@
 
 A full-stack micro-lending web application that enables multiple lenders to fractionally co-fund a single borrower loan. Built with a database-first approach — critical financial logic lives at the PostgreSQL layer, not the application layer.
 
-**Group ID:** 13
 
 ---
 
