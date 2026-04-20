@@ -16,7 +16,7 @@ CREATE TABLE users (
     email           VARCHAR(255) UNIQUE NOT NULL,
     password_hash   VARCHAR(255),               -- NULL for Google OAuth users
     google_id       VARCHAR(255) UNIQUE,         -- NULL for email/password users
-    role            VARCHAR(20) CHECK (role IN ('borrower', 'lender', 'admin')) DEFAULT NULL,
+    role            VARCHAR(20) CHECK (role IN ('user', 'borrower', 'lender', 'admin')) DEFAULT 'user',
     phone           VARCHAR(20),
     avatar_url      TEXT,
     wallet_balance  DECIMAL(15, 2) NOT NULL DEFAULT 0.00,
