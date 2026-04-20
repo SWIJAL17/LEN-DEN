@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <defs>
+    <linearGradient id="g1" x1="0%" y1="100%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#0d9488"/>
+      <stop offset="50%" stop-color="#14b8a6"/>
+      <stop offset="100%" stop-color="#2dd4bf"/>
+    </linearGradient>
+    <linearGradient id="g2" x1="0%" y1="100%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#0f766e"/>
+      <stop offset="100%" stop-color="#5eead4"/>
+    </linearGradient>
+  </defs>
+  <!-- Background -->
+  <rect width="64" height="64" rx="14" fill="#0f1219"/>
+  <!-- Circular arrow / swirl -->
+  <path d="M32 12 C18 12 12 22 12 32 C12 42 18 52 32 52 C42 52 48 46 50 40" 
+        stroke="url(#g1)" stroke-width="5" fill="none" stroke-linecap="round"/>
+  <!-- Arrowhead on the circular path -->
+  <polygon points="48,36 54,42 46,44" fill="url(#g1)"/>
+  <!-- Upward trending arrow -->
+  <line x1="22" y1="44" x2="42" y2="18" stroke="url(#g2)" stroke-width="4.5" stroke-linecap="round"/>
+  <!-- Arrow tip -->
+  <polygon points="42,18 44,27 35,20" fill="url(#g2)"/>
+</svg>
