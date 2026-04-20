@@ -42,6 +42,12 @@ microlend-platform/
 │       ├── loans/
 │       ├── users/
 │       └── ledger/
+├── database/          ← SQL files
+│   ├── schema.sql
+│   ├── triggers.sql
+│   ├── procedures.sql
+│   ├── views.sql
+│   └── seed_data.sql
 ├── .gitignore
 └── README.md
 ```
@@ -53,7 +59,7 @@ microlend-platform/
 ### Prerequisites
 
 - Node.js v18 or higher
-- PostgreSQL 16
+- PostgreSQL 18
 - npm
 
 ### 1. Clone the repository
